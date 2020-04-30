@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table, td {
+                border: 1px solid black;
+            }
+            #name{
+                height: 3vh;
+                width: 17vw;
+            }
+            body{
+                text-align: -webkit-center;
+            }
+            #button{
+                background-color: #ab4a9f;
+                border: none;
+                color: white;
+                padding: 10px 6px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 3rem;
+            }
+            h2{
+                color: #ab4a9f
+            }
+            #myTable{
+                 min-width: 35vw;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Todo List</h2>
+    <form action="#" method="GET" onsubmit="addRow()">
+        <input placeholder="Task name" id="name">
+        <input type="submit" id="button" value="Add task">
+    </form>
+        <br>
+    <table id="myTable"> </table>
+    <br>
+        <script>
+            var table = document.getElementById("myTable");
+            var staticdata = [
+                 ["Todo Tasks"],
+                ["Move Drop down feature from tab1 to tab2"],
+                ["Add new Radar chart to PMF view"],
+                ["Solve delete issue from Input view"]
+            ]
+            function initTable() {
+                table.innerHTML="";
+
+                for (var i = 0; i < staticdata.length; i++) {
+                    var row = table.insertRow(i);
+                    for (var j = 0; j < staticdata[i].length; j++) {
+                        row.insertCell(j).innerHTML = staticdata[i][j];
+                    }
+                    if (i == 0) {
+                        row.insertCell(j).innerHTML = 'action';
+                    }
+                    else {
+                        row.insertCell(j).innerHTML = '<button type="button" onclick="deleteRow(' + i + ')">delete</button>';
+                    }
+                }
+            }
+            
+            function addRow() {
+                if(document.getElementById('name').value){
+                    staticdata.push([document.getElementById('name').value])
+                    initTable();
+                    document.getElementById("name").value = "";
+                }
+            }
+
+            function deleteRow(x) {
+                staticdata.splice(x, 1);
+                initTable();
+            }
+            initTable();
+        </script>
+    </body>
+</html>
